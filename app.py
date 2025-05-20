@@ -51,7 +51,3 @@ def index():
                                percentual=round(percentual, 1),
                                classificacao=classificacao)
     return render_template('index.html')
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
