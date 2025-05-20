@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado do TC6M</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container py-4">
+    <h2>Resultado do Teste de Caminhada de 6 Minutos</h2>
+    <p><strong>Paciente:</strong> {{ nome }}</p>
+    <p><strong>Distância percorrida:</strong> {{ distancia_real }} metros</p>
+    <p><strong>Distância ideal:</strong> {{ distancia_ideal }} metros</p>
+    <p><strong>Percentual atingido:</strong> {{ percentual }}%</p>
+    <p><strong>Classificação do desempenho:</strong> {{ classificacao }}</p>
+    <hr>
+<div style="background-color: #f0f0f0; padding: 15px; border-radius: 10px; margin-top: 20px;">
+  <h3>📌 Fórmulas utilizadas</h3>
+  <p><strong>Homens:</strong> (7,57 × altura em cm) – (5,02 × idade) – (1,76 × peso em kg) – 309</p>
+  <p><strong>Mulheres:</strong> (2,11 × altura em cm) – (2,29 × peso em kg) – (5,78 × idade) + 667</p>
+
+  <h3 style="margin-top:20px;">📊 Classificação do desempenho</h3>
+  <table style="width:100%; border-collapse: collapse;">
+    <thead>
+      <tr style="background-color: #ddd;">
+        <th style="padding: 8px; border: 1px solid #999;">% da distância ideal</th>
+        <th style="padding: 8px; border: 1px solid #999;">Classificação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding: 8px; border: 1px solid #999;">&gt; 90%</td><td style="padding: 8px; border: 1px solid #999;">Excelente</td></tr>
+      <tr><td style="padding: 8px; border: 1px solid #999;">80–90%</td><td style="padding: 8px; border: 1px solid #999;">Bom</td></tr>
+      <tr><td style="padding: 8px; border: 1px solid #999;">70–79%</td><td style="padding: 8px; border: 1px solid #999;">Regular</td></tr>
+      <tr><td style="padding: 8px; border: 1px solid #999;">60–69%</td><td style="padding: 8px; border: 1px solid #999;">Fraco</td></tr>
+      <tr><td style="padding: 8px; border: 1px solid #999;">&lt; 60%</td><td style="padding: 8px; border: 1px solid #999;">Muito fraco / Risco</td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+    <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Novo teste</a>
+</body>
+</html>

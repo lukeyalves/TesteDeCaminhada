@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste de Caminhada de 6 Minutos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="container py-4">
+    <h2 class="mb-3">Teste de Caminhada de 6 Minutos</h2>
+    <p>Insira os dados do paciente e a distância do circuito (em metros). Após iniciar, clique em "Adicionar volta" a cada volta concluída. O cronômetro irá contar 6 minutos.</p>
+
+    <form id="formulario" method="POST">
+        <div class="mb-2">
+            <label>Nome:</label>
+            <input type="text" class="form-control" name="nome" required>
+        </div>
+        <div class="mb-2">
+            <label>Idade:</label>
+            <input type="number" class="form-control" name="idade" required>
+        </div>
+        <div class="mb-2">
+            <label>Gênero:</label>
+            <select class="form-control" name="genero" required>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+            </select>
+        </div>
+        <div class="mb-2">
+            <label>Altura (cm):</label>
+            <input type="number" class="form-control" name="altura" required>
+        </div>
+        <div class="mb-2">
+            <label>Peso (kg):</label>
+            <input type="number" class="form-control" name="peso" required>
+        </div>
+        <div class="mb-2">
+            <label>Distância do circuito (m):</label>
+            <input type="number" class="form-control" name="circuito" required>
+        </div>
+
+        <div id="cronometro" class="my-4 text-center d-none">
+            <h3 id="timer">06:00</h3>
+        
+            <!-- NOVO: Exibe número de voltas -->
+            <h4 id="voltasDisplay" class="my-3">Voltas: 0</h4>
+        
+            <input type="hidden" id="voltas" name="voltas" value="0">
+            <button type="button" class="btn btn-primary" onclick="adicionarVolta()">Adicionar volta</button>
+            <button type="submit" class="btn btn-danger">Finalizar teste</button>
+        </div>
+        
+
+        <button type="button" class="btn btn-success" onclick="iniciarCronometro()">Iniciar teste</button>
+    </form>
+
+    <script>
+        let tempo = 360;
+        let intervalo;
+        let voltas = 0;
+
+        function formatarTempo(segundos) {
+            const m = Math.floor(segundos / 60).toString().padStart(2, '0');
+            const s = (segundos % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        function iniciarCronometro() {
+            document.getElementById('cronometro').classList.remove('d-none');
+            document.querySelector('button.btn-success').style.display = 'none';
+
+            intervalo = setInterval(() => {
+                tempo--;
+                document.getElementById('timer').innerText = formatarTempo(tempo);
+
+                if (tempo <= 0) {
+                    clearInterval(intervalo);
+                    document.getElementById('formulario').submit();
+                }
+            }, 1000);
+        }
+
+        function adicionarVolta() {
+    voltas++;
+    document.getElementById('voltas').value = voltas;
+    document.getElementById('voltasDisplay').innerText = `Voltas: ${voltas}`;
+}
+    </script>
+</body>
+</html>
